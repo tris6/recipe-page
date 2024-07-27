@@ -2,6 +2,9 @@
 /* Had to look up custom bullets CSS */
 /* Bullet vertical alignment forces ::before selector, had to google a fair bit 
 before getting straight answer ::marker can't do vertical align */
+/* Also learned about <HR> */
+/* Learned about nth selectors */
+/* Discovered ::marker only takes shorthand font property, not font-family */
 
 :root {
     --color-page-title: hsl(24, 5%, 18%);
@@ -10,15 +13,13 @@ before getting straight answer ::marker can't do vertical align */
 
     --color-prep-bg: hsl(330, 100%, 98%);
     --color-prep-primary: hsl(332, 51%, 32%);
+
+    --color-page-bg: hsl(30, 54%, 90%);
+
+    --color-hr: hsl(30, 18%, 87%);
     
     --font-title: "Young Serif", serif;
     --font-text: "Outfit", serif;
-
-
-
-    --stone100: hsl(30, 54%, 90%);
-    --stone150: hsl(30, 18%, 87%);
-
 }
 
 /* LAYOUT */
@@ -28,10 +29,21 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: darkgray;
 }
 
 ul { margin-left: -55px; }
+
+li { margin-bottom: 12px; }
+
+hr {
+    border: none;
+    height: 1px;
+    color: var(--color-hr);
+    background-color: var(--color-hr);
+
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
 
 .card {
     width: 375px;
@@ -41,7 +53,7 @@ ul { margin-left: -55px; }
     background: #fff;
 }
 
-.container { width: 315px; }
+.container { width: 310px; }
 
 .image { width: 375px; }
 
@@ -50,10 +62,61 @@ ul { margin-left: -55px; }
 aside {
     background: var(--color-prep-bg);
     margin-top: 30px;
+    margin-bottom: 40px;
     padding: 5px 30px;
 }
 
-figure { margin-left: 0; }
+figure {
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 25px;
+}
+
+.grid__2x4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(1fr, 4);
+}
+
+.grid__2x4 div {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--color-hr);
+}
+
+.grid__2x4 div:last-of-type, .grid__2x4 div:nth-last-of-type(2) {
+    border-bottom: 0;
+}
+
+.grid__2x4 div:nth-of-type(odd) {
+    padding-left: 35px;
+}
+
+@media screen and (min-width: 768px) {
+    body {
+        background-color: var(--color-page-bg);
+    }
+
+    .container, .image {
+        width: 655px;
+    }
+
+    .card {
+        width: 735px;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        padding-top: 35px;
+        padding-bottom: 20px;
+
+        border-radius: 30px;
+    }
+
+    .image, aside { border-radius: 20px; }
+
+    .container {
+        width: 655px;
+    }
+}
 
 /* LIST LAYOUT */
 
@@ -63,15 +126,20 @@ li {
     align-items: center;
 }
 
-li::before {
+ul li::before {
     content: "■";
     font-size: 8px;
     color: var(--color-sect-header);
     margin-right: 24px;
 }
 
-aside li::before {
-    color: var(--color-prep-primary);
+aside li::before { color: var(--color-prep-primary); }
+
+ol { padding-left: 25px; }
+
+ol li {
+    display: list-item;
+    padding-left: 15px;
 }
 
 li p { margin: 0; }
@@ -102,6 +170,20 @@ aside h2 {
     font-weight: 600;
 }
 
-.sect-header { color: var(--color-sect-header); }
+.sect-header {
+    color: var(--color-sect-header);
+    font-size: 28px;
+    font-weight: 500;
+}
 
 aside h2 { font-family: var(--font-text); }
+
+ol li::marker {
+    font: normal normal 700 100% "Outfit", sans-serif;
+    color: var(--color-sect-header);
+}
+
+.grid__2x4 div:nth-of-type(even) {
+    color: var(--color-sect-header);
+    font-weight: 600;
+}
