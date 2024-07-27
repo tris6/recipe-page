@@ -89,9 +89,7 @@ figure {
         background-color: var(--color-page-bg);
     }
 
-    .container, .image {
-        width: 655px;
-    }
+    .container, .image { width: 655px; }
 
     .card {
         width: 735px;
@@ -104,10 +102,6 @@ figure {
     }
 
     .image, aside { border-radius: 20px; }
-
-    .container {
-        width: 655px;
-    }
 }
 
 /* LIST LAYOUT */
